@@ -1,0 +1,8 @@
+.modal{
+    background-color: white;
+    height: 70vh;
+    width: 50vh;
+    margin: 5% auto;
+    display: grid;
+    padding: 30px;
+}
