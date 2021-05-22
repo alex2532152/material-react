@@ -6,3 +6,15 @@
     display: grid;
     padding: 30px;
 }
+.cardBlock{
+    width: 40%;
+    height: 20%;
+    border-radius: 30px;
+    margin: 10px;
+}
+.cardBlock h2{
+    font-size: 30px;
+}
+.cardBlock p{
+    font-size: 20px;
+}

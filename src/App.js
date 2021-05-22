@@ -85,6 +85,8 @@ export default function PersistentDrawerLeft() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const initialMaterial = {id: 1, title: 'title', description: 'description', group: 'none'}
+  const [materialState, setMaterialState] = React.useState([initialMaterial])
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -154,7 +156,7 @@ export default function PersistentDrawerLeft() {
         })}
       >
         <div className={classes.drawerHeader} />
-        <Material />
+        <Material materialState={materialState} setMaterialState={setMaterialState} />
       </main>
     </div>
   );
