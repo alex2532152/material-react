@@ -15,6 +15,14 @@
 .modal > div, .modal > form > div {
     margin-bottom: 20px;
 }
+.main-material{
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+}
+.main-material .cardBlock {
+    width: 90%;
+    height: auto;
+}
 .cardBlock{
     width: 40%;
     height: 20%;

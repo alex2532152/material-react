@@ -29,49 +29,45 @@ export default ({materialState, setMaterialState}) => {
             >
                 Add new material
             </Button>
-            <Swiches groupState={groupState} setGroupState={setGroupState} />
-            <AddNewMaterial open={open} setOpen={setOpen} materialState={materialState} setMaterialState={setMaterialState} />
+            <div className='main-material'>
+                <Swiches groupState={groupState} setGroupState={setGroupState} />
+                <div>
+                    <AddNewMaterial open={open} setOpen={setOpen} materialState={materialState} setMaterialState={setMaterialState} />
 
-            <div>
-                {JSON.parse(localStorage.getItem('materials')).filter(item => {
-                    switch (item.group) {
-                        case 'None':
-                            if (groupState.groupNone) return true
-                            break;
-                        case 'Math':
-                            if (groupState.groupMath) return true
-                            break;
-                        case 'History':
-                            if (groupState.groupHistory) return true
-                            break;
-                        default:
-                            return false
-                    }
-                    // if (item.group === 'None' && groupState.groupNone) {
-                    //     return true
-                    // } else if (item.group === 'Math' && groupState.groupMath) {
-                    //     return true
-                    // } else if (item.group === 'History' && groupState.groupHistory) {
-                    //     return true
-                    // }
-                    // return false
-                }).map(item => (
-                    <>
-                    <Card className='cardBlock'>
-                        <CardContent>
-                            <Typography variant="h2" component="h2">
-                                {item.title}
-                            </Typography>
-                            <Typography variant="p" component="p">
-                                {item.description}
-                            </Typography>
-                            <Typography variant="p" component="p" color="textSecondary">
-                                {item.group}
-                            </Typography>
-                        </CardContent>
-                    </Card>
-                    </>
-                ))}
+                    <div>
+                        {JSON.parse(localStorage.getItem('materials')).filter(item => {
+                            switch (item.group) {
+                                case 'None':
+                                    if (groupState.groupNone) return true
+                                    break;
+                                case 'Math':
+                                    if (groupState.groupMath) return true
+                                    break;
+                                case 'History':
+                                    if (groupState.groupHistory) return true
+                                    break;
+                                default:
+                                    return false
+                            }
+                        }).map(item => (
+                            <>
+                            <Card className='cardBlock'>
+                                <CardContent>
+                                    <Typography variant="h2" component="h2">
+                                        {item.title}
+                                    </Typography>
+                                    <Typography variant="p" component="p">
+                                        {item.description}
+                                    </Typography>
+                                    <Typography variant="p" component="p" color="textSecondary">
+                                        {item.group}
+                                    </Typography>
+                                </CardContent>
+                            </Card>
+                            </>
+                        ))}
+                    </div>
+                </div>
             </div>
         </div>
     )
