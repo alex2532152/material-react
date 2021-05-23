@@ -6,6 +6,15 @@
     display: grid;
     padding: 30px;
 }
+.MuiFormControl-root{
+    width: 100%;
+}
+.modal h2{
+    margin: 0;
+}
+.modal > div, .modal > form > div {
+    margin-bottom: 20px;
+}
 .cardBlock{
     width: 40%;
     height: 20%;

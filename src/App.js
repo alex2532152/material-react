@@ -85,9 +85,8 @@ export default function PersistentDrawerLeft() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-  const initialMaterial = {id: 1, title: 'title', description: 'description', group: 'none'}
-  const [materialState, setMaterialState] = React.useState([initialMaterial])
-
+  const initialMaterial = {id: 1, title: 'title', description: 'description', group: 'None'} // можно оставить пустой объект
+  const [materialState, setMaterialState] = React.useState(JSON.parse(localStorage.getItem('materials')) ? JSON.parse(localStorage.getItem('materials')) : [initialMaterial])
   const handleDrawerOpen = () => {
     setOpen(true);
   };

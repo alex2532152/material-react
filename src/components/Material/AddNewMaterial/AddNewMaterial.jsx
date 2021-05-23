@@ -21,6 +21,7 @@ export default ({open, setOpen, materialState, setMaterialState}) => {
             group: group
         }
         setMaterialState([...materialState, newItem])
+        localStorage.setItem('materials', JSON.stringify(materialState))
         setOpen(false)
     }
     return (
@@ -30,6 +31,7 @@ export default ({open, setOpen, materialState, setMaterialState}) => {
                 onClose={() => setOpen(false)}
                 aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description"
+                variant="outlined"
             >
                 <div className='modal'>
                     <h2>Напишите что-то</h2>

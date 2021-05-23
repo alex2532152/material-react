@@ -6,7 +6,6 @@ import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import { Typography } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import './style.css'
 
@@ -17,16 +16,10 @@ export default ({materialState, setMaterialState}) => {
         groupMath: true, 
         groupHistory: true, 
     })
-    console.log(materialState);
-    // const Materials = [
-    //     {id: 1, title: 'First material', description: 'Its information about first material', group: 'best'},
-    //     {id: 2, title: 'Second material', description: 'Its information about second material', group: 'main'},
-    //     {id: 3, title: 'Third material', description: 'Its information about third material', group: 'main'},
-    // ]
-    // const [material, setMaterial] = React.useState(Materials)
+    localStorage.setItem('materials', JSON.stringify(materialState))
+
     return (
         <div>
-            {/* <MaterialsBlock material={material} setMaterial={setMaterial} /> */}
             <Button
                 onClick={()=> setOpen(true)}
                 variant="contained"
@@ -40,15 +33,28 @@ export default ({materialState, setMaterialState}) => {
             <AddNewMaterial open={open} setOpen={setOpen} materialState={materialState} setMaterialState={setMaterialState} />
 
             <div>
-                {materialState.filter(item => {
-                    if (item.group === 'None' && groupState.groupNone) {
-                        return true
-                    } else if (item.group === 'Math' && groupState.groupMath) {
-                        return true
-                    } else if (item.group === 'History' && groupState.groupHistory) {
-                        return true
+                {JSON.parse(localStorage.getItem('materials')).filter(item => {
+                    switch (item.group) {
+                        case 'None':
+                            if (groupState.groupNone) return true
+                            break;
+                        case 'Math':
+                            if (groupState.groupMath) return true
+                            break;
+                        case 'History':
+                            if (groupState.groupHistory) return true
+                            break;
+                        default:
+                            return false
                     }
-                    return false
+                    // if (item.group === 'None' && groupState.groupNone) {
+                    //     return true
+                    // } else if (item.group === 'Math' && groupState.groupMath) {
+                    //     return true
+                    // } else if (item.group === 'History' && groupState.groupHistory) {
+                    //     return true
+                    // }
+                    // return false
                 }).map(item => (
                     <>
                     <Card className='cardBlock'>
