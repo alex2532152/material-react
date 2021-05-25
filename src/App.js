@@ -1,5 +1,11 @@
 import React from 'react';
 import clsx from 'clsx';
+import {
+  BrowserRouter,
+  Switch,
+  Route,
+  NavLink,
+} from "react-router-dom";
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -15,13 +21,11 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 import HomeWorkIcon from '@material-ui/icons/HomeWork';
-import SchoolIcon from '@material-ui/icons/School';
-import MenuBookIcon from '@material-ui/icons/MenuBook';
-import Material from './components/Material/Material'
-
+import BookIcon from '@material-ui/icons/Book';
+import FaceIcon from '@material-ui/icons/Face';
+import Material from './components/Material/Material';
+import Students from "./components/Students/Students"
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -82,20 +86,22 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function PersistentDrawerLeft() {
+  const initialMaterial = {id: 1, title: 'Title', description: 'description', group: 'None'}
+  const [materialState, setMaterialState] = React.useState([initialMaterial])
+  const [studentsState, setStudentsState] = React.useState([
+    {id: 1, name: 'Vasya Petrov', email: 'vasya@gmail.com', group: 'FE-108'}
+  ])
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-  const initialMaterial = {id: 1, title: 'title', description: 'description', group: 'None'} // можно оставить пустой объект
-  const [materialState, setMaterialState] = React.useState(JSON.parse(localStorage.getItem('materials')) ? JSON.parse(localStorage.getItem('materials')) : [initialMaterial])
   const handleDrawerOpen = () => {
     setOpen(true);
   };
-
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
   return (
+    <BrowserRouter>
     <div className={classes.root}>
       <CssBaseline />
       <AppBar
@@ -135,17 +141,17 @@ export default function PersistentDrawerLeft() {
         </div>
         <Divider />
         <List>
-          <ListItem button>
-            <ListItemIcon> <HomeWorkIcon /> </ListItemIcon>
-            <ListItemText primary='Homework' />
+            <ListItem button component={NavLink} to="/homework">
+                <ListItemIcon> <HomeWorkIcon /></ListItemIcon>
+                <ListItemText primary='Homework' />
+            </ListItem>          
+          <ListItem button component={NavLink} to="/material">
+              <ListItemIcon> <BookIcon /></ListItemIcon>
+              <ListItemText primary='Material' />
           </ListItem>
-          <ListItem button>
-            <ListItemIcon> <MenuBookIcon /> </ListItemIcon>
-            <ListItemText primary='Material' />
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon> <SchoolIcon /> </ListItemIcon>
-            <ListItemText primary='Students' />
+          <ListItem button component={NavLink} to="/students">
+              <ListItemIcon> <FaceIcon /> </ListItemIcon>
+              <ListItemText primary='Students' />
           </ListItem>
         </List>
       </Drawer>
@@ -155,8 +161,16 @@ export default function PersistentDrawerLeft() {
         })}
       >
         <div className={classes.drawerHeader} />
-        <Material materialState={materialState} setMaterialState={setMaterialState} />
+        <Switch>
+          <Route path="/material">
+            <Material materialState={materialState} setMaterialState={setMaterialState} />
+          </Route>
+          <Route path="/students">
+            <Students studentsState={studentsState} setStudentsState={setStudentsState} />
+          </Route>
+        </Switch>
       </main>
     </div>
+    </BrowserRouter>
   );
 }
