@@ -26,6 +26,7 @@ import BookIcon from '@material-ui/icons/Book';
 import FaceIcon from '@material-ui/icons/Face';
 import Material from './components/Material/Material';
 import Students from "./components/Students/Students"
+import HomeWork from "./components/Homework/Homework"
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -91,6 +92,9 @@ export default function PersistentDrawerLeft() {
   const [studentsState, setStudentsState] = React.useState([
     {id: 1, name: 'Vasya Petrov', email: 'vasya@gmail.com', group: 'FE-108'}
   ])
+  const [homeworkState, setHomeworkState] = React.useState([
+    {id: 1, group: 'None', title: 'Title', description: 'description', deadline: 'Срок сдачи: 1/1/2021'}
+  ])
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -141,10 +145,10 @@ export default function PersistentDrawerLeft() {
         </div>
         <Divider />
         <List>
-            <ListItem button component={NavLink} to="/homework">
-                <ListItemIcon> <HomeWorkIcon /></ListItemIcon>
-                <ListItemText primary='Homework' />
-            </ListItem>          
+          <ListItem button component={NavLink} to="/homework">
+              <ListItemIcon> <HomeWorkIcon /></ListItemIcon>
+              <ListItemText primary='Homework' />
+          </ListItem>          
           <ListItem button component={NavLink} to="/material">
               <ListItemIcon> <BookIcon /></ListItemIcon>
               <ListItemText primary='Material' />
@@ -162,6 +166,9 @@ export default function PersistentDrawerLeft() {
       >
         <div className={classes.drawerHeader} />
         <Switch>
+          <Route path="/homework">
+            <HomeWork homeworkState={homeworkState} setHomeworkState={setHomeworkState} />
+          </Route>
           <Route path="/material">
             <Material materialState={materialState} setMaterialState={setMaterialState} />
           </Route>

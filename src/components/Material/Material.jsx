@@ -31,7 +31,11 @@ export default ({materialState, setMaterialState}) => {
             </Button>
             <AddNewMaterial
             selectGroup={['None', 'Language', 'Programming']}
-            type={'material'} state={materialState} setState={setMaterialState} open={open} setOpen={setOpen} />
+            type={'material'} 
+            state={materialState} 
+            setState={setMaterialState} 
+            open={open} 
+            setOpen={setOpen} />
             <div>
                 {materialState.filter(item => {
                     if (item.group === "None" && groupState.groupNone) {
